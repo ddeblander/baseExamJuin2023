@@ -1,11 +1,13 @@
 package bibliotheque.metier;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-public class Location {
+public class Location implements Serializable {
+    private static long serialVersionUID = 123456L;
     private LocalDate dateLocation;
     private LocalDate dateRestitution;
     private Lecteur loueur;

@@ -6,8 +6,12 @@ import bibliotheque.metier.Location;
 import bibliotheque.mvp.presenter.LocationPresenter;
 import bibliotheque.mvp.presenter.SpecialLocationPresenter;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import static bibliotheque.utilitaires.Utilitaire.*;
@@ -52,7 +56,7 @@ public class LocationViewConsole extends AbstractViewConsole<Location> implement
         int choix =  choixElt(ldatas);
         Location l = ldatas.get(choix-1);
 
-        List options = new ArrayList<>(Arrays.asList("calculer amende","enregistrer retour","fin"));
+        List options = new ArrayList<>(Arrays.asList("calculer amende","enregistrer retour","suppression et archivage","fin"));
         do {
             int ch = choixListe(options);
 
@@ -64,7 +68,8 @@ public class LocationViewConsole extends AbstractViewConsole<Location> implement
                 case 2:
                     retour(l);
                     break;
-                case 3 :return;
+                case 3 :deleteAndSave();
+                case 4 :return;
             }
         } while (true);
     }
@@ -78,5 +83,34 @@ public class LocationViewConsole extends AbstractViewConsole<Location> implement
     @Override
     public void amende(Location l) {
         ((SpecialLocationPresenter)presenter).calculerAmende(l);
+    }
+ //question 6
+    public void deleteAndSave()
+    {
+        LocalDate deleteDate;
+        System.out.println("insérez la date limite des suppression");
+        deleteDate=lecDate();
+        ObjectOutputStream oos=null;
+        try{
+            FileOutputStream fos = new FileOutputStream("archive.txt");
+            oos=new ObjectOutputStream(fos);
+            Iterator i = ldatas.iterator();
+            Location l;
+            while(i.hasNext())
+            {
+                l=(Location) i.next();
+                if(l.getDateLocation().isBefore(deleteDate))
+                {
+                    oos.writeBytes(l.toString());
+                    oos.writeBytes("\n");
+                    i.remove();
+                }
+            }
+            System.out.println("Archivage effectués");
+            oos.close();
+        }catch (Exception e)
+        {
+            System.out.println(e);
+        }
     }
 }
