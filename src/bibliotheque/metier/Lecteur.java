@@ -107,7 +107,8 @@ if(nom==null || prenom==null ||nom.trim().equals("")||prenom.trim().equals("")) 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lecteur lecteur = (Lecteur) o;
-        return numlecteur == lecteur.numlecteur;
+        //return numlecteur == lecteur.numlecteur;
+        return (lecteur.getNom().equals(this.getNom())&&(lecteur.getPrenom().equals(this.getPrenom()))&&(lecteur.getTel().equals(this.getTel())));
     }
 
     @Override

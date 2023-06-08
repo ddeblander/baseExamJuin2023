@@ -16,7 +16,13 @@ public class LecteurModel extends AbstractModel<Lecteur> implements SpecialLecte
     private List<Lecteur> lecteurs = new ArrayList<>();
     private Map<String,Lecteur> hml= new HashMap<>();
     public Lecteur add(Lecteur nl){
-        //TODO éviter doublons sur nom,prénom,tel
+        //question 4
+
+        if(getAll().contains(nl))
+        {
+            System.out.println("erreur de création");
+            return null;
+        }
         Lecteur l = super.add(nl);
         if(l!=null) {
             l.setNumlecteur(++numLecteur);

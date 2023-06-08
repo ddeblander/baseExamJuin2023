@@ -12,4 +12,6 @@ public interface DAO<T> {
     T read(T rech);
 
     List<T> getAll();
+
+    List<T> getAllInversed();
 }

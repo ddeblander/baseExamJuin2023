@@ -35,7 +35,7 @@
         }
 
         public void menu() {
-            List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "rechercher","modifier","special","fin"));
+            List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "rechercher","modifier","special","Inverser l'ordre","fin"));
             do {
                 int ch = choixListe(options);
 
@@ -57,6 +57,8 @@
                         special();
                         break;
                     case 6:
+                        affList(inversedList());
+                    case 7:
                         return;
                 }
             } while (true);
@@ -74,6 +76,12 @@
             T elt = l.get(nl - 1);
             return elt;
         }
+        private List<T> inversedList()
+        {
+            Collections.reverse(ldatas);
+            return ldatas;
+        }
+
         protected abstract void rechercher();
 
         protected  abstract void modifier();

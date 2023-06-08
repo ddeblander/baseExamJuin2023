@@ -1,6 +1,7 @@
 package bibliotheque.mvp.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractModel<T> implements DAO<T>{
@@ -42,6 +43,11 @@ public abstract class AbstractModel<T> implements DAO<T>{
         return ldatas;
     }
 
-
+    @Override
+    public List<T> getAllInversed()
+    {
+        Collections.reverse(ldatas);
+        return getAll();
+    }
 
 }

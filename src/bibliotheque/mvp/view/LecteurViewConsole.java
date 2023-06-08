@@ -158,6 +158,8 @@ public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements 
     public void livreLoue(Lecteur lec) {
         ((SpecialLecteurPresenter)presenter).livreLoue(lec);
     }
+
+
 }
 
 

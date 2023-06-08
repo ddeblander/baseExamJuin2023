@@ -60,4 +60,5 @@ public class LecteurPresenter extends Presenter<Lecteur> implements SpecialLecte
         if(lAdd==null || lAdd.isEmpty()) view.affMsg("aucun livre loué par ce lecteur");
         else view.affList(lAdd);
     }
+
 }
