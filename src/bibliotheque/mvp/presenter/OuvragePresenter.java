@@ -41,7 +41,7 @@ public class OuvragePresenter extends Presenter<Ouvrage> implements SpecialOuvra
     }
 
     @Override
-    public void listerTypeOuvrage(TypeOuvrage to)
+    public List<Ouvrage> listerTypeOuvrage(TypeOuvrage to)
     {
         List<Ouvrage> lO= model.getAll();
         List ll = null;
@@ -84,7 +84,52 @@ public class OuvragePresenter extends Presenter<Ouvrage> implements SpecialOuvra
 
         }
         Collections.sort(ll);
-        view.affList(ll);
+        return ll;
     }
+
+    @Override
+    public void rechercher(TypeOuvrage to,String idUnique)
+    {
+        List<Ouvrage> lO=listerTypeOuvrage(to);
+        List<Ouvrage> lAdd = new ArrayList<>();
+        if(to.equals(TypeOuvrage.LIVRE))
+        {
+            for (Ouvrage o : lO)
+            {
+                if(((Livre) o).getIsbn().equals(idUnique))
+                {
+                    lAdd.add(o);
+                }
+            }
+        }
+        else if(to.equals(TypeOuvrage.CD))
+        {
+            for (Ouvrage o : lO)
+            {
+                if(((CD) o).getCode()==Long.parseLong(idUnique))
+                {
+                    lAdd.add(o);
+                }
+            }
+        }
+        else if(to.equals(TypeOuvrage.DVD))
+        {
+            for (Ouvrage o : lO)
+            {
+                if(((DVD) o).getCode() ==Long.parseLong(idUnique))
+                {
+                    lAdd.add(o);
+                }
+            }
+        }
+        if(lAdd.size()==0)
+        {
+            view.affMsg("recherche infructueuse");
+
+        }
+        view.affList(lAdd);
+
+    }
+
 
 }

@@ -4,6 +4,8 @@ import bibliotheque.metier.Auteur;
 import bibliotheque.metier.Ouvrage;
 import bibliotheque.metier.TypeOuvrage;
 
+import java.util.List;
+
 public interface SpecialOuvragePresenter {
     void setAuteurPresenter(Presenter<Auteur> auteurPresenter);
 
@@ -13,5 +15,6 @@ public interface SpecialOuvragePresenter {
 
     void listerExemplaire(Ouvrage o, boolean enLocation);
 
-    void listerTypeOuvrage(TypeOuvrage to);
+    List<Ouvrage> listerTypeOuvrage(TypeOuvrage to);
+    void rechercher(TypeOuvrage to,String idUnique);
 }

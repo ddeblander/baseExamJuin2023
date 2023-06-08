@@ -16,13 +16,22 @@ import static bibliotheque.utilitaires.Utilitaire.*;
 public class OuvrageViewConsole extends AbstractViewConsole<Ouvrage> implements SpecialOuvrageViewConsole {
     @Override
     protected void rechercher() {
+        //question 2
         List<TypeOuvrage> lTo = new ArrayList<>();
+        List<String> lEncodage = new ArrayList<>();
+        lEncodage.add("isbn : ");
+        lEncodage.add("matricule(CD) : ");
+        lEncodage.add("matricule(DVD) : ");
+
         lTo.add(TypeOuvrage.LIVRE);
         lTo.add(TypeOuvrage.CD);
         lTo.add(TypeOuvrage.DVD);
+
         affList(lTo);
-        int choix = choixElt(lTo)-1;
-        ((SpecialOuvragePresenter)presenter).listerTypeOuvrage(lTo.get(choix));
+        int choixTo = choixElt(lTo)-1;
+        affMsg(lEncodage.get(choixTo));
+        String idUnique = sc.nextLine();
+        ((SpecialOuvragePresenter)presenter).rechercher(lTo.get(choixTo),idUnique);
 
     }
 
