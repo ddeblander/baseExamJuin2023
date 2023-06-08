@@ -10,4 +10,6 @@ public interface SpecialLecteurPresenter {
     void lecParMail(String mail);
 
      void chargementLecteurParFichier();
+
+     void livreLoue(Lecteur l);
 }

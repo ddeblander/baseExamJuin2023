@@ -16,7 +16,14 @@ import static bibliotheque.utilitaires.Utilitaire.*;
 public class OuvrageViewConsole extends AbstractViewConsole<Ouvrage> implements SpecialOuvrageViewConsole {
     @Override
     protected void rechercher() {
-      //TODO rechercher ouvrage
+        List<TypeOuvrage> lTo = new ArrayList<>();
+        lTo.add(TypeOuvrage.LIVRE);
+        lTo.add(TypeOuvrage.CD);
+        lTo.add(TypeOuvrage.DVD);
+        affList(lTo);
+        int choix = choixElt(lTo)-1;
+        ((SpecialOuvragePresenter)presenter).listerTypeOuvrage(lTo.get(choix));
+
     }
 
     @Override

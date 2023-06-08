@@ -1,13 +1,11 @@
 package bibliotheque.mvp.presenter;
 
-import bibliotheque.metier.Exemplaire;
-import bibliotheque.metier.Lecteur;
+import bibliotheque.metier.*;
 import bibliotheque.mvp.model.DAO;
 import bibliotheque.mvp.model.SpecialLecteur;
 import bibliotheque.mvp.view.ViewInterface;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class LecteurPresenter extends Presenter<Lecteur> implements SpecialLecteurPresenter {
 
@@ -41,5 +39,25 @@ public class LecteurPresenter extends Presenter<Lecteur> implements SpecialLecte
     public void chargementLecteurParFichier() {
         ((SpecialLecteur)model).chargementParFichier();
         view.affMsg("chargement des lecteurs terminé");
+    }
+
+// réponse question 1
+    @Override
+    public void livreLoue(Lecteur l) {
+        List<Exemplaire> lex =   ((SpecialLecteur)model).exemplairesLoues(l);
+        List<Livre> lAdd = new ArrayList<>();
+        for(Exemplaire e : lex)
+        {
+            if(e.getOuvrage().getTo().equals(TypeOuvrage.LIVRE)) {
+                if (!lAdd.contains(e.getOuvrage()))
+                {
+                    lAdd.add((Livre)e.getOuvrage());
+                }
+            }
+
+        }
+        Collections.sort(lAdd);
+        if(lAdd==null || lAdd.isEmpty()) view.affMsg("aucun livre loué par ce lecteur");
+        else view.affList(lAdd);
     }
 }

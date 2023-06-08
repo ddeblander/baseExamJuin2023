@@ -10,4 +10,6 @@ public interface SpecialLecteurViewConsole {
     void lecParMail();
 
     void chargmementLecteurParFichier();
+
+    void livreLoue(Lecteur lec);
 }

@@ -3,7 +3,7 @@ package bibliotheque.metier;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Livre extends Ouvrage{
+public class Livre extends Ouvrage implements Comparable<Livre>{
     private String isbn;
     private int nbrePages;
     private TypeLivre tl;
@@ -82,5 +82,10 @@ public class Livre extends Ouvrage{
                 ", tl=" + tl +
                 ", resume='" + resume + '\'' +
                 "} " ;
+    }
+
+    @Override
+    public int compareTo(Livre o) {
+        return this.isbn.compareTo(o.getIsbn());
     }
 }

@@ -103,7 +103,7 @@ public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements 
         int choix =  choixElt(ldatas);
         Lecteur lec = ldatas.get(choix-1);
 
-        List options = new ArrayList<>(Arrays.asList("Exemplaire en location","Exemplaires loués","recherche par mail","chargement par fichier","fin"));
+        List options = new ArrayList<>(Arrays.asList("Exemplaire en location","Exemplaires loués","recherche par mail","chargement par fichier","Livre loués","fin"));
         do {
             int ch = choixListe(options);
                  switch (ch) {
@@ -119,7 +119,10 @@ public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements 
                      case 4:
                          chargmementLecteurParFichier();
                          break;
-                    case 5: return;
+                     case 5:
+                         livreLoue(lec);
+                         break;
+                    case 6: return;
                     default:
                         System.out.println("choix invalide recommencez ");
                 }
@@ -149,6 +152,11 @@ public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements 
     @Override
     public void chargmementLecteurParFichier() {
         ((SpecialLecteurPresenter)presenter).chargementLecteurParFichier();
+    }
+
+    @Override
+    public void livreLoue(Lecteur lec) {
+        ((SpecialLecteurPresenter)presenter).livreLoue(lec);
     }
 }
 
